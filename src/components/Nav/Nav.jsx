@@ -10,7 +10,7 @@ const Nav = () => {
         <NavLink to='/' className={({ isActive }) => `text-lg font-semibold cursor-pointer duration-500 hover:shadow-lg p-3 rounded ${isActive ? 'border-b-4': ''}`}>Home</NavLink>
         <NavLink to='/gg' className={({ isActive }) => `text-lg font-semibold cursor-pointer duration-500 hover:shadow-lg p-3 rounded ${isActive ? 'border-b-4': ''}`}>Instructors</NavLink>
         <NavLink to='/gg' className={({ isActive }) => `text-lg font-semibold cursor-pointer duration-500 hover:shadow-lg p-3 rounded ${isActive ? 'border-b-4': ''}`}>Classes</NavLink>
-        <NavLink to='/gg' className={({ isActive }) => `text-lg font-semibold cursor-pointer duration-500 hover:shadow-lg p-3 rounded ${isActive ? 'border-b-4': ''}`}>Dashboard</NavLink>
+        <NavLink to='/dashboard' className={({ isActive }) => `text-lg font-semibold cursor-pointer duration-500 hover:shadow-lg p-3 rounded ${isActive ? 'border-b-4': ''}`}>Dashboard</NavLink>
     </>
     return (
         <div className="navbar bg-base-100">
