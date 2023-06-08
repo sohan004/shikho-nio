@@ -1,9 +1,59 @@
 import React from 'react';
 import useUser from '../../useHook/useUser/useUser';
+import Swal from 'sweetalert2';
 
 const ManageUser = () => {
     const { data, refetch } = useUser()
-    console.log(data);
+
+    const alert = async (d) => {
+        const { value: fruit } = await Swal.fire({
+            title: "Do you want to change this user's role?",
+            input: 'select',
+            inputOptions: {
+                'Role': {
+                    Admin: 'Admin',
+                    Student: 'Student',
+                    instractor: 'instractor',
+                },
+            },
+            inputPlaceholder: 'Select a Role',
+            showCancelButton: true,
+            inputValidator: (value) => {
+                return new Promise((resolve) => {
+                    if (value === '') {
+                        return Swal.close()
+                    }
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: `Do you want to make this user an ${value}?`,
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes!'
+                    }).then((result) => {
+
+                        fetch(`http://localhost:5000/users/${d._id}`, {
+                            method: 'PATCH',
+                            headers: { 'content-type': 'application/json' },
+                            body: JSON.stringify({ role: value.toLowerCase() })
+                        })
+                            .then(res => res.json())
+                            .then(uData => {
+                                if (uData.modifiedCount > 0) {
+                                    Swal.fire(
+                                        'User Role Update Successfully',
+                                        '',
+                                        'success'
+                                    )
+                                    refetch()
+                                }
+                            })
+                    })
+                })
+            }
+        })
+    }
     return (
         <div className="overflow-x-auto">
             <table className="table ">
@@ -21,7 +71,7 @@ const ManageUser = () => {
                         <th>{i + 1}</th>
                         <td>{d.name}</td>
                         <td>{d.email}</td>
-                        <td><button className={`btn ${d.role === "admin"? 'btn-error': 'btn-primary'}`}>{d.role}</button></td>
+                        <td><button onClick={() => alert(d)} className={`btn ${d.role === "admin" ? 'btn-error' : 'btn-primary'}`}>{d.role}</button></td>
                     </tr>)}
                 </tbody>
             </table>
