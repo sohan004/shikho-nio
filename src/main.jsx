@@ -10,6 +10,7 @@ import AuthProvider from './components/AuthProvider/AuthProvider.jsx'
 import Dashboard from './components/Dashboard/Dashboard.jsx'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import ManageUser from './components/DashboardRoute/ManageUser/ManageUser.jsx'
+import AddClass from './components/DashboardRoute/AddClass/AddClass.jsx'
 
 const router = createBrowserRouter([
   {
@@ -37,7 +38,11 @@ const router = createBrowserRouter([
       {
         path: '/dashboard/manage_user',
         element: <ManageUser></ManageUser>
-      }
+      },
+      {
+        path: '/dashboard/add_class',
+        element: <AddClass></AddClass>
+      },
     ]
   }
 ])
