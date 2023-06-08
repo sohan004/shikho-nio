@@ -34,6 +34,37 @@ const ManageClass = () => {
             }
         })
     }
+
+    const feedback = async (d) => {
+        const { value: text } = await Swal.fire({
+            input: 'textarea',
+            inputLabel: 'Feedback',
+            inputPlaceholder: 'Type your message here...',
+            inputAttributes: {
+                'aria-label': 'Type your message here'
+            },
+            showCancelButton: true
+        })
+
+        if (text) {
+            fetch(`http://localhost:5000/class_details/${d._id}`, {
+                method: 'PUT',
+                headers: { 'content-type': 'application/json' },
+                body: JSON.stringify({ feedback: text })
+            })
+                .then(res => res.json())
+                .then(resData => {
+                    Swal.fire({
+                        position: 'top-center',
+                        icon: 'success',
+                        title: 'feedback send successfully',
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                    refetch()
+                })
+        }
+    }
     return (
         <div>
             <div className="overflow-auto w-full">
@@ -67,7 +98,7 @@ const ManageClass = () => {
                             <td><button className={`btn btn-xs ${d.status === 'approved' && 'btn-accent'} ${d.status === 'denied' && 'btn-secondary'} ${d.status === 'pending' && 'btn-primary'}`}>{d.status}</button></td>
                             <td><button onClick={() => approve('approve', d)} disabled={d.status === 'approved' || d.status === 'denied'} className="btn btn-primary btn-sm">Approve</button></td>
                             <td><button onClick={() => approve('denie', d)} disabled={d.status === 'approved' || d.status === 'denied'} className="btn btn-error btn-sm">Reject</button></td>
-                            <td><button className="btn btn-neutral btn-sm">Feedback</button></td>
+                            <td><button disabled={d.status === 'pending'} onClick={() => feedback(d)} className="btn btn-neutral btn-sm">Feedback</button></td>
                         </tr>)}
                     </tbody>
                 </table>
