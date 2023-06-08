@@ -23,7 +23,7 @@ const Sec1 = () => {
                     <img src={img4} className='w-full' />
                 </div>
             </Carousel>
-            <div className='absolute top-2 md:top-1/3  lg:top-2/4   glass px-7 py-3 md:py-14'>
+            <div className='absolute top-2 md:top-1/3 hidden md:block  lg:top-2/4   glass px-7 py-3 md:py-14'>
                 <h1 className='text-lg md:text-2xl lg:text-4xl mb-1 md:mb-5 font-semibold '>SHIKHO NIO - Explore the World of Language Learning</h1>
                 <p className='text-xs md:text-sm'> Shikho Nio, meaning "Learn and Thrive" in Bengali, is your gateway to an immersive language learning experience. Our website is designed to empower learners of all ages and backgrounds to embark on a journey of linguistic discovery. With a diverse range of courses, interactive lessons, and expert guidance, Shikho Nio offers a holistic approach to language acquisition </p>
             </div>

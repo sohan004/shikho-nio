@@ -11,6 +11,9 @@ import Dashboard from './components/Dashboard/Dashboard.jsx'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import ManageUser from './components/DashboardRoute/ManageUser/ManageUser.jsx'
 import AddClass from './components/DashboardRoute/AddClass/AddClass.jsx'
+import MyClass from './components/DashboardRoute/MyClass/MyClass.jsx'
+import MyClassUpdate from './components/DashboardRoute/MyClassUpdate/MyClassUpdate.jsx'
+import ManageClass from './components/DashboardRoute/ManageClass/ManageClass.jsx'
 
 const router = createBrowserRouter([
   {
@@ -40,8 +43,21 @@ const router = createBrowserRouter([
         element: <ManageUser></ManageUser>
       },
       {
+        path: '/dashboard/manage_class',
+        element: <ManageClass></ManageClass>
+      },
+      {
         path: '/dashboard/add_class',
         element: <AddClass></AddClass>
+      },
+      {
+        path: '/dashboard/my_class',
+        element: <MyClass></MyClass>
+      },
+      {
+        path: '/dashboard/class_update/:id',
+        element: <MyClassUpdate></MyClassUpdate>,
+        loader: ({ params }) => fetch(`http://localhost:5000/class_details/${params.id}`)
       },
     ]
   }

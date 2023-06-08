@@ -25,7 +25,7 @@ const SignUp = () => {
         const img = data.img[0]
         const formData = new FormData()
         formData.append('image', img)
-        fetch('https://api.imgbb.com/1/upload?key=a6cd731c6ad36722a49db82badc8c356', {
+        fetch(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_img}`, {
             method: 'post',
             body: formData
         })
