@@ -18,8 +18,8 @@ const MyClassUpdate = () => {
         setTf(false)
         const classInfo = {
             className: inputData.className,
-            seat: inputData.seat,
-            price: inputData.price,
+            seat: +inputData.seat,
+            price: +inputData.price,
         }
         fetch(`http://localhost:5000/class_details/${data._id}`, {
             method: 'PUT',

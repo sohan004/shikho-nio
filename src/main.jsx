@@ -15,6 +15,7 @@ import MyClass from './components/DashboardRoute/MyClass/MyClass.jsx'
 import MyClassUpdate from './components/DashboardRoute/MyClassUpdate/MyClassUpdate.jsx'
 import ManageClass from './components/DashboardRoute/ManageClass/ManageClass.jsx'
 import Classes from './components/Classes/Classes.jsx'
+import SelectedClass from './components/DashboardRoute/SelectedClass/SelectedClass.jsx'
 
 const router = createBrowserRouter([
   {
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
       {
         path: '/dashboard/my_class',
         element: <MyClass></MyClass>
+      },
+      {
+        path: '/dashboard/selected_class',
+        element: <SelectedClass></SelectedClass>
       },
       {
         path: '/dashboard/class_update/:id',
