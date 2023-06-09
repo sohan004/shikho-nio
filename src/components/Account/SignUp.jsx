@@ -72,7 +72,7 @@ const SignUp = () => {
 
     return (
         <div className='max-w-screen-xl mx-auto shadow-lg'>
-            <div className='flex flex-col-reverse gap-4 md:flex-row items-center py-11 md:mt-24 bg-slate-100  px-6'>
+            <div className='flex flex-col-reverse gap-4 md:flex-row items-center py-11  bg-slate-100  px-6'>
                 <div className='w-full md:w-6/12'>
                     <img src={gif} className='w-100' alt="" />
                 </div>

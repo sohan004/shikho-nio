@@ -14,6 +14,7 @@ import AddClass from './components/DashboardRoute/AddClass/AddClass.jsx'
 import MyClass from './components/DashboardRoute/MyClass/MyClass.jsx'
 import MyClassUpdate from './components/DashboardRoute/MyClassUpdate/MyClassUpdate.jsx'
 import ManageClass from './components/DashboardRoute/ManageClass/ManageClass.jsx'
+import Classes from './components/Classes/Classes.jsx'
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home></Home>
+      },
+      {
+        path: '/classes',
+        element: <Classes></Classes>
       },
       {
         path: '/sign_in',

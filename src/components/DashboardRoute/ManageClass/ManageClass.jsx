@@ -94,7 +94,7 @@ const ManageClass = () => {
                             <td>{d.name}</td>
                             <td>{d.email}</td>
                             <td>{d.seat}</td>
-                            <td>{d.price} BDT</td>
+                            <td>${d.price}</td>
                             <td><button className={`btn btn-xs ${d.status === 'approved' && 'btn-accent'} ${d.status === 'denied' && 'btn-secondary'} ${d.status === 'pending' && 'btn-primary'}`}>{d.status}</button></td>
                             <td><button onClick={() => approve('approve', d)} disabled={d.status === 'approved' || d.status === 'denied'} className="btn btn-primary btn-sm">Approve</button></td>
                             <td><button onClick={() => approve('denie', d)} disabled={d.status === 'approved' || d.status === 'denied'} className="btn btn-error btn-sm">Reject</button></td>
