@@ -12,7 +12,7 @@ const Dashboard = () => {
 
     const student = <>
         <NavLink to="/dashboard/selected_class" className={({ isActive }) => `flex items-center gap-2 font-medium ${isActive ? 'bg-gray-200 text-black p-3 rounded-e-3xl' : ''}`}><BsFillCartPlusFill /> My Selected Class</NavLink>
-        <NavLink to="/dashboard/my_class" className={({ isActive }) => `flex items-center gap-2 font-medium ${isActive ? 'bg-gray-200 text-black p-3 rounded-e-3xl' : ''}`}><BsFillCheckCircleFill /> My Enroled Class</NavLink>
+        <NavLink to="/dashboard/enroll_class" className={({ isActive }) => `flex items-center gap-2 font-medium ${isActive ? 'bg-gray-200 text-black p-3 rounded-e-3xl' : ''}`}><BsFillCheckCircleFill /> My Enroled Class</NavLink>
         <NavLink to="/dashboard/pay" className={({ isActive }) => `flex items-center gap-2 font-medium ${isActive ? 'bg-gray-200 text-black p-3 rounded-e-3xl' : ''}`}><BsCurrencyExchange /> My Payment History</NavLink>
         {/* <NavLink>My Selected Class</NavLink>
         <NavLink>My Enroled Class</NavLink>

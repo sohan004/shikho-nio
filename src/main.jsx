@@ -18,6 +18,7 @@ import Classes from './components/Classes/Classes.jsx'
 import SelectedClass from './components/DashboardRoute/SelectedClass/SelectedClass.jsx'
 import Payment from './components/Payment/Payment.jsx'
 import PayHistory from './components/DashboardRoute/PayHistory/PayHistory.jsx'
+import EnrollClass from './components/DashboardRoute/EnrollClass/EnrollClass.jsx'
 
 const router = createBrowserRouter([
   {
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
       {
         path: '/dashboard/selected_class',
         element: <SelectedClass></SelectedClass>
+      },
+      {
+        path: '/dashboard/enroll_class',
+        element: <EnrollClass></EnrollClass>
       },
       {
         path: '/dashboard/pay/:id',
