@@ -8,7 +8,7 @@ const Nav = () => {
     const userImage = user?.photoURL || blank
     const navItem = <>
         <NavLink to='/' className={({ isActive }) => `text-base font-semibold cursor-pointer duration-500 px-4 rounded ${isActive ? 'border-b-4': ''}`}>Home</NavLink>
-        <NavLink to='/gg' className={({ isActive }) => `text-base font-semibold cursor-pointer duration-500 px-4 rounded ${isActive ? 'border-b-4': ''}`}>Instructors</NavLink>
+        <NavLink to='/instractor' className={({ isActive }) => `text-base font-semibold cursor-pointer duration-500 px-4 rounded ${isActive ? 'border-b-4': ''}`}>Instructors</NavLink>
         <NavLink to='/classes' className={({ isActive }) => `text-base font-semibold cursor-pointer duration-500 px-4 rounded ${isActive ? 'border-b-4': ''}`}>Classes</NavLink>
         <NavLink to='/dashboard' className={({ isActive }) => `text-base font-semibold cursor-pointer duration-500 px-4 rounded ${isActive ? 'border-b-4': ''}`}>Dashboard</NavLink>
     </>

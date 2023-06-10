@@ -71,7 +71,7 @@ const SelectedClass = () => {
                                             <td>{d.className}</td>
                                             <td>${d.price}</td>
                                             <td><button onClick={() => delet(d)} className="btn btn-error "><BsTrash3Fill className='text-xl'></BsTrash3Fill></button></td>
-                                            <td><Link to={`/dashboard/pay/${d._id}`}><button className="btn btn-primary"><BsCurrencyExchange className='text-lg' /> payment</button></Link></td>
+                                            <td><Link to={`/dashboard/pay/${d._id}`}><button className="btn btn-warning"><BsCurrencyExchange className='text-lg' /> payment</button></Link></td>
                                         </tr>)}
                                     </tbody>
                                 </table>

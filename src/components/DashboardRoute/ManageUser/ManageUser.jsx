@@ -97,7 +97,8 @@ const ManageUser = () => {
                         <th>#</th>
                         <th>Name</th>
                         <th>email</th>
-                        <th>role</th>
+                        <th>current role</th>
+                        <th>change role</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -105,6 +106,7 @@ const ManageUser = () => {
                         <th>{i + 1}</th>
                         <td>{d.name}</td>
                         <td>{d.email}</td>
+                        <td>{d.role}</td>
                         <td><button onClick={() => roleCng('admin', d)} disabled={d.role === 'admin' || d.role === 'instractor'} className="btn btn-error">Make Admin</button></td>
                         <td><button onClick={() => roleCng('instractor', d)} disabled={d.role === 'instractor' || d.role === 'admin'} className="btn btn-primary">Make instractor</button></td>
                         {/* <td><button onClick={() => alert(d)} className={`btn ${d.role === "admin" ? 'btn-error' : 'btn-primary'}`}>{d.role}</button></td> */}

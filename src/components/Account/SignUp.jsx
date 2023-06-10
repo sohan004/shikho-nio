@@ -36,7 +36,7 @@ const SignUp = () => {
                     .then(result => {
                         updt(result.user, data.name, imgData.data.display_url)
                             .then(updtData => {
-                                const userInfo = { name: result.user.displayName, email: result.user.email, role: 'student' }
+                                const userInfo = { name: result.user.displayName, email: result.user.email, role: 'student',img: result.user.photoURL }
                                 fetch('http://localhost:5000/users', {
                                     method: 'POST',
                                     headers: { 'content-type': 'application/json' },

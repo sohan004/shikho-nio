@@ -19,6 +19,7 @@ import SelectedClass from './components/DashboardRoute/SelectedClass/SelectedCla
 import Payment from './components/Payment/Payment.jsx'
 import PayHistory from './components/DashboardRoute/PayHistory/PayHistory.jsx'
 import EnrollClass from './components/DashboardRoute/EnrollClass/EnrollClass.jsx'
+import Instractor from './components/Instractor/Instractor.jsx'
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,11 @@ const router = createBrowserRouter([
       {
         path: '/classes',
         element: <Classes></Classes>
+      },
+      {
+        path: '/instractor',
+        element: <Instractor></Instractor>,
+        loader: ()=>fetch('http://localhost:5000/all_instractor')
       },
       {
         path: '/sign_in',
@@ -77,7 +83,7 @@ const router = createBrowserRouter([
         loader: ({ params }) => fetch(`http://localhost:5000/cart/${params.id}`)
       },
       {
-        path: '/dashboard/pay',
+        path: '/dashboard/payment',
         element: <PayHistory></PayHistory>
       },
       {
