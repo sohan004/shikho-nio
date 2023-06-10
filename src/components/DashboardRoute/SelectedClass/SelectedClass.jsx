@@ -3,10 +3,10 @@ import useCart from '../../useHook/useCart/useCart';
 import { BsArrowBarRight, BsCurrencyExchange, BsFillEmojiLaughingFill, BsTrash3Fill } from "react-icons/bs";
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
+import { GridLoader } from 'react-spinners';
 
 const SelectedClass = () => {
-    const { data, refetch } = useCart()
-    console.log(data);
+    const { data, refetch, isLoading } = useCart()
     const delet = c => {
         Swal.fire({
             title: 'Are you sure?',
@@ -38,35 +38,39 @@ const SelectedClass = () => {
     }
     return (
         <div>
-            {data.length === 0 ?
-            <div className='flex justify-center items-center flex-col gap-4'>
-                <h1 className='text-2xl flex items-center gap-2'>No Class Added <BsFillEmojiLaughingFill></BsFillEmojiLaughingFill></h1>
-               <Link to="/classes"> <button className="btn btn-outline">Go To Classes Page <BsArrowBarRight className='text-lg'/></button></Link>
-            </div> :<div className="overflow-auto w-full">
-                <table className="table w-full overflow-auto">
-                    {/* head */}
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>class image</th>
-                            <th>class Name</th>
-                            <th>Price</th>
-                            <th>delete</th>
-                            <th>Payment</th>
+            {isLoading ? <div className='flex justify-center my-5'>
+                <GridLoader color="#36d7b7" />
+            </div> : <div>
+                {data.length === 0 ?
+                    <div className='flex justify-center items-center flex-col gap-4'>
+                        <h1 className='text-2xl flex items-center gap-2'>No Class Added <BsFillEmojiLaughingFill></BsFillEmojiLaughingFill></h1>
+                        <Link to="/classes"> <button className="btn btn-outline">Go To Classes Page <BsArrowBarRight className='text-lg' /></button></Link>
+                    </div> : <div className="overflow-auto w-full">
+                        <table className="table w-full overflow-auto">
+                            {/* head */}
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>class image</th>
+                                    <th>class Name</th>
+                                    <th>Price</th>
+                                    <th>delete</th>
+                                    <th>Payment</th>
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {data.map((d, i) => <tr key={d._id}>
-                            <th>{i + 1}</th>
-                            <td><img src={d.classImg} className='w-14 rounded-lg' alt="" /></td>
-                            <td>{d.className}</td>
-                            <td>${d.price}</td>
-                            <td><button onClick={() => delet(d)} className="btn btn-error "><BsTrash3Fill className='text-xl'></BsTrash3Fill></button></td>
-                            <td><button className="btn btn-primary"><BsCurrencyExchange className='text-lg'/> payment</button></td>
-                        </tr>)}
-                    </tbody>
-                </table>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {data.map((d, i) => <tr key={d._id}>
+                                    <th>{i + 1}</th>
+                                    <td><img src={d.classImg} className='w-14 rounded-lg' alt="" /></td>
+                                    <td>{d.className}</td>
+                                    <td>${d.price}</td>
+                                    <td><button onClick={() => delet(d)} className="btn btn-error "><BsTrash3Fill className='text-xl'></BsTrash3Fill></button></td>
+                                    <td><Link to={`/dashboard/pay/${d._id}`}><button className="btn btn-primary"><BsCurrencyExchange className='text-lg' /> payment</button></Link></td>
+                                </tr>)}
+                            </tbody>
+                        </table>
+                    </div>}
             </div>}
         </div>
     );

@@ -40,7 +40,9 @@ const Classes = () => {
             studentEmail: user?.email,
             instractorEmail: c.email,
             availableSeat: c.seat,
-            price: c.price
+            price: c.price,
+            payment: false,
+            totalEnroll: c.enroll,
         }
         fetch('http://localhost:5000/carts', {
             method: 'post',

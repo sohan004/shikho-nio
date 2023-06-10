@@ -70,9 +70,9 @@ const ManageUser = () => {
 
             if (result.isConfirmed) {
                 fetch(`http://localhost:5000/users/${d._id}`, {
-                    method: 'PATCH',
+                    method: 'put',
                     headers: { 'content-type': 'application/json' },
-                    body: JSON.stringify({ role: role.toLowerCase() })
+                    body: JSON.stringify({ role: role.toLowerCase(), enroll: 0 })
                 })
                     .then(res => res.json())
                     .then(uData => {

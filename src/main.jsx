@@ -16,6 +16,8 @@ import MyClassUpdate from './components/DashboardRoute/MyClassUpdate/MyClassUpda
 import ManageClass from './components/DashboardRoute/ManageClass/ManageClass.jsx'
 import Classes from './components/Classes/Classes.jsx'
 import SelectedClass from './components/DashboardRoute/SelectedClass/SelectedClass.jsx'
+import Payment from './components/Payment/Payment.jsx'
+import PayHistory from './components/DashboardRoute/PayHistory/PayHistory.jsx'
 
 const router = createBrowserRouter([
   {
@@ -63,6 +65,15 @@ const router = createBrowserRouter([
       {
         path: '/dashboard/selected_class',
         element: <SelectedClass></SelectedClass>
+      },
+      {
+        path: '/dashboard/pay/:id',
+        element: <Payment></Payment>,
+        loader: ({ params }) => fetch(`http://localhost:5000/cart/${params.id}`)
+      },
+      {
+        path: '/dashboard/pay',
+        element: <PayHistory></PayHistory>
       },
       {
         path: '/dashboard/class_update/:id',
