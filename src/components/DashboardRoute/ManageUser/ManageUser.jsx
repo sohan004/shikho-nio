@@ -1,9 +1,11 @@
 import React from 'react';
 import useUser from '../../useHook/useUser/useUser';
 import Swal from 'sweetalert2';
+import useAxios from '../../useHook/useAxios/useAxios';
 
 const ManageUser = () => {
     const { data, refetch } = useUser()
+    const axios = useAxios()
 
     // const alert = async (d) => {
     //     const { value: fruit } = await Swal.fire({
@@ -69,14 +71,9 @@ const ManageUser = () => {
         }).then((result) => {
 
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/users/${d._id}`, {
-                    method: 'put',
-                    headers: { 'content-type': 'application/json' },
-                    body: JSON.stringify({ role: role.toLowerCase(), enroll: 0 })
-                })
-                    .then(res => res.json())
+                axios.put(`/users/${d._id}`, { role: role.toLowerCase(), enroll: 0 })
                     .then(uData => {
-                        if (uData.modifiedCount > 0) {
+                        if (uData.data.modifiedCount > 0) {
                             Swal.fire(
                                 'User Role Update Successfully',
                                 '',

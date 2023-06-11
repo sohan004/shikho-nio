@@ -5,9 +5,11 @@ import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
 import { GridLoader } from 'react-spinners';
 import { FaCartPlus, FaRegMoneyBillAlt } from 'react-icons/fa';
+import useAxios from '../../useHook/useAxios/useAxios';
 
 const SelectedClass = () => {
     const { data, refetch, isLoading } = useCart()
+    const axios = useAxios()
     const delet = c => {
         Swal.fire({
             title: 'Are you sure?',
@@ -19,12 +21,9 @@ const SelectedClass = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/carts/${c._id}`, {
-                    method: 'delete'
-                })
-                    .then(res => res.json())
+                axios.delete(`http://localhost:5000/carts/${c._id}`)
                     .then(resData => {
-                        if (resData.deletedCount > 0) {
+                        if (resData.data.deletedCount > 0) {
                             refetch()
                             Swal.fire(
                                 'Deleted!',

@@ -3,8 +3,10 @@ import { AuthContex } from '../../AuthProvider/AuthProvider';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import { GridLoader } from 'react-spinners';
+import useAxios from '../../useHook/useAxios/useAxios';
 
 const AddClass = () => {
+    const axios = useAxios()
     const { user } = useContext(AuthContex)
     const [tf, setTf] = useState(true)
     const {
@@ -36,14 +38,9 @@ const AddClass = () => {
                     status: 'pending',
                     feedback: ''
                 }
-                fetch('http://localhost:5000/class', {
-                    method: 'post',
-                    headers: { 'content-type': 'application/json' },
-                    body: JSON.stringify(classInfo)
-                })
-                    .then(res => res.json())
+                axios.post('/class', classInfo)
                     .then(insert => {
-                        if (insert.insertedId) {
+                        if (insert.data.insertedId) {
                             Swal.fire(
                                 'class added',
                                 'your class added successfully',

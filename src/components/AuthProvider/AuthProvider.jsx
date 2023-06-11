@@ -19,6 +19,7 @@ const AuthProvider = ({ children }) => {
         return signInWithEmailAndPassword(auth, email, pass)
     }
     const out = (email, pass) => {
+        localStorage.removeItem('user-token')
         setLoad(true)
         return signOut(auth)
     }
@@ -30,6 +31,13 @@ const AuthProvider = ({ children }) => {
         setLoad(true)
         return updateProfile(u, {
             displayName: n, photoURL: i
+        })
+    }
+    const jwt = (u) => {
+        return fetch('http://localhost:5000/jwt', {
+            method: 'post',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(u)
         })
     }
 
@@ -52,6 +60,7 @@ const AuthProvider = ({ children }) => {
         updt,
         out,
         google,
+        jwt
     }
     return (
         <AuthContex.Provider value={info}>

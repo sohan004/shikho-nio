@@ -3,8 +3,10 @@ import { useForm } from 'react-hook-form';
 import { useLoaderData } from 'react-router-dom';
 import { GridLoader } from 'react-spinners';
 import Swal from 'sweetalert2';
+import useAxios from '../../useHook/useAxios/useAxios';
 
 const MyClassUpdate = () => {
+    const axios = useAxios()
     const data = useLoaderData()
     const [tf, setTf] = useState(true)
     const {
@@ -21,12 +23,7 @@ const MyClassUpdate = () => {
             seat: +inputData.seat,
             price: +inputData.price,
         }
-        fetch(`http://localhost:5000/class_details/${data._id}`, {
-            method: 'PUT',
-            headers: { 'content-type': 'application/json' },
-            body: JSON.stringify(classInfo)
-        })
-            .then(res => res.json())
+        axios.put(`/class_details/${data._id}`, classInfo)
             .then(resData => {
                 Swal.fire({
                     position: 'top-center',

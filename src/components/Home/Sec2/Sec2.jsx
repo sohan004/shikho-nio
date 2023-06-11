@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import useAxios from '../../useHook/useAxios/useAxios';
 
 const Sec2 = () => {
+    const axios = useAxios()
     const [data, setData] = useState([])
     useEffect(() => {
-        fetch('http://localhost:5000/populer_class')
-            .then(res => res.json())
-            .then(resData => setData(resData))
+        axios.get('/populer_class')
+            .then(resData => setData(resData.data))
     }, [])
     return (
         <div className='mt-14'>

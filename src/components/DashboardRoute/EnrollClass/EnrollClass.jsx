@@ -1,14 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContex } from '../../AuthProvider/AuthProvider';
 import { FaBook } from 'react-icons/fa';
+import useAxios from '../../useHook/useAxios/useAxios';
 
 const EnrollClass = () => {
     const { user } = useContext(AuthContex)
     const [data, setData] = useState([])
+    const axios = useAxios()
     useEffect(() => {
-        fetch(`http://localhost:5000/enroll/${user?.email}`)
-            .then(res => res.json())
-            .then(resData => setData(resData))
+        axios.get(`/enroll/${user?.email}`)
+            .then(resData => setData(resData.data))
     }, [user])
     return (
         <div>

@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { AuthContex } from '../AuthProvider/AuthProvider';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import useAxios from '../useHook/useAxios/useAxios';
 
 const CheckoutForm = ({ price, id, classId, enroll, seat, instractor }) => {
     const stripe = useStripe();
@@ -13,15 +14,11 @@ const CheckoutForm = ({ price, id, classId, enroll, seat, instractor }) => {
     const [clientSecret, setClientSecret] = useState("");
     const [tf, setTf] = useState(true)
     const navigate = useNavigate()
+    const axios = useAxios()
 
     useEffect(() => {
-        fetch("http://localhost:5000/create-payment-intent", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ price: +price }),
-        })
-            .then((res) => res.json())
-            .then((data) => setClientSecret(data.clientSecret));
+        axios.post("http://localhost:5000/create-payment-intent", { price: +price })
+            .then((data) => setClientSecret(data.data.clientSecret));
     }, []);
 
 
@@ -116,40 +113,22 @@ const CheckoutForm = ({ price, id, classId, enroll, seat, instractor }) => {
             else {
                 if (paymentIntent.status === "succeeded") {
 
-                    fetch(`http://localhost:5000/carts/${id}`, {
-                        method: 'put',
-                        headers: { 'content-type': 'application/json' }
-                    })
-                        .then(res => res.json())
+                    axios.put(`/carts/${id}`)
                         .then(resData => {
-                            if (resData.modifiedCount) {
-                                fetch(`http://localhost:5000/class_details/${classId}`, {
-                                    method: 'PUT',
-                                    headers: { 'content-type': 'application/json' },
-                                    body: JSON.stringify({ enroll: +enroll + 1, seat: +seat - 1 })
-                                })
-                                    .then(res => res.json())
+                            if (resData.data.modifiedCount) {
+                                axios.put(`/class_details/${classId}`, { enroll: +enroll + 1, seat: +seat - 1 })
                                     .then(resData2 => {
-                                        if (resData2.modifiedCount) {
-                                            fetch(`http://localhost:5000/instractor/${instractor}`, {
-                                                method: 'PUT',
-                                                headers: { 'content-type': 'application/json' },
-                                            })
-                                                .then(res => res.json())
+                                        if (resData2.data.modifiedCount) {
+                                            axios.put(`/instractor/${instractor}`)
                                                 .then(resData3 => {
-                                                    if (resData3.modifiedCount) {
+                                                    if (resData3.data.modifiedCount) {
                                                         const info = {
                                                             id: paymentIntent.id,
                                                             email: user?.email,
                                                             date: new Date(),
                                                             price: +paymentIntent.amount / 100
                                                         }
-                                                        fetch('http://localhost:5000/payment', {
-                                                            method: 'post',
-                                                            headers: { 'content-type': 'application/json' },
-                                                            body: JSON.stringify(info)
-                                                        })
-                                                            .then(res => res.json())
+                                                        axios.post('/payment', info)
                                                             .then(resData => {
                                                                 Swal.fire({
                                                                     position: 'top-center',

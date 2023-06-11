@@ -5,8 +5,10 @@ import { AuthContex } from '../AuthProvider/AuthProvider';
 import Swal from 'sweetalert2';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { GridLoader } from 'react-spinners';
+import useAxios from '../useHook/useAxios/useAxios';
 
 const Classes = () => {
+    const axios = useAxios()
     const [classes, setClasses] = useState([])
     const { user } = useContext(AuthContex)
     const navigate = useNavigate()
@@ -45,14 +47,9 @@ const Classes = () => {
             payment: false,
             totalEnroll: c.enroll,
         }
-        fetch('http://localhost:5000/carts', {
-            method: 'post',
-            headers: { 'content-type': 'application/json' },
-            body: JSON.stringify(info)
-        })
-            .then(res => res.json())
+        axios.post('/carts', info)
             .then(insert => {
-                if (insert.insertedId) {
+                if (insert.data.insertedId) {
                     Swal.fire({
                         position: 'top-center',
                         icon: 'success',

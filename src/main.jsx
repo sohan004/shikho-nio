@@ -20,6 +20,13 @@ import Payment from './components/Payment/Payment.jsx'
 import PayHistory from './components/DashboardRoute/PayHistory/PayHistory.jsx'
 import EnrollClass from './components/DashboardRoute/EnrollClass/EnrollClass.jsx'
 import Instractor from './components/Instractor/Instractor.jsx'
+import PrivateRoute from './components/Private.jsx/PrivateRoute.jsx'
+import PrivateStudent from './components/Private.jsx/PrivateStudent.jsx'
+import PrivateInstractor from './components/Private.jsx/PrivateInstractor.jsx'
+import PrivateAdmin from './components/Private.jsx/PrivateAdmin.jsx'
+import Welcome from './components/DashboardRoute/Welcome/Welcome.jsx'
+
+
 
 const router = createBrowserRouter([
   {
@@ -37,7 +44,7 @@ const router = createBrowserRouter([
       {
         path: '/instractor',
         element: <Instractor></Instractor>,
-        loader: ()=>fetch('http://localhost:5000/all_instractor')
+        loader: () => fetch('http://localhost:5000/all_instractor')
       },
       {
         path: '/sign_in',
@@ -51,44 +58,48 @@ const router = createBrowserRouter([
   },
   {
     path: '/dashboard',
-    element: <Dashboard></Dashboard>,
+    element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
     children: [
       {
+        path: '/dashboard/welcome',
+        element: <Welcome></Welcome>
+      },
+      {
         path: '/dashboard/manage_user',
-        element: <ManageUser></ManageUser>
+        element: <PrivateAdmin><ManageUser></ManageUser></PrivateAdmin>
       },
       {
         path: '/dashboard/manage_class',
-        element: <ManageClass></ManageClass>
+        element: <PrivateAdmin><ManageClass></ManageClass></PrivateAdmin>
       },
       {
         path: '/dashboard/add_class',
-        element: <AddClass></AddClass>
+        element: <PrivateInstractor><AddClass></AddClass></PrivateInstractor>
       },
       {
         path: '/dashboard/my_class',
-        element: <MyClass></MyClass>
+        element: <PrivateInstractor><MyClass></MyClass></PrivateInstractor>
       },
       {
         path: '/dashboard/selected_class',
-        element: <SelectedClass></SelectedClass>
+        element: <PrivateStudent><SelectedClass></SelectedClass></PrivateStudent>
       },
       {
         path: '/dashboard/enroll_class',
-        element: <EnrollClass></EnrollClass>
+        element: <PrivateStudent><EnrollClass></EnrollClass></PrivateStudent>
       },
       {
         path: '/dashboard/pay/:id',
-        element: <Payment></Payment>,
+        element: <PrivateStudent><Payment></Payment></PrivateStudent>,
         loader: ({ params }) => fetch(`http://localhost:5000/cart/${params.id}`)
       },
       {
         path: '/dashboard/payment',
-        element: <PayHistory></PayHistory>
+        element: <PrivateStudent><PayHistory></PayHistory></PrivateStudent>
       },
       {
         path: '/dashboard/class_update/:id',
-        element: <MyClassUpdate></MyClassUpdate>,
+        element: <PrivateInstractor><MyClassUpdate></MyClassUpdate></PrivateInstractor>,
         loader: ({ params }) => fetch(`http://localhost:5000/class_details/${params.id}`)
       },
     ]

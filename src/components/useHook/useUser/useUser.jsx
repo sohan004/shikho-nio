@@ -1,9 +1,11 @@
 import { useQuery } from "@tanstack/react-query"
+import useAxios from "../useAxios/useAxios"
 
 const useUser = () => {
+    const axios = useAxios()
     const { refetch, data = [] } = useQuery(['users'], async () => {
-        const res = await fetch(`http://localhost:5000/users`)
-        const userCarts = await res.json()
+        const res = await axios.get(`/users`)
+        const userCarts = await res.data
         return userCarts
     }
 

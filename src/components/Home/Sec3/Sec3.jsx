@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import useAxios from '../../useHook/useAxios/useAxios';
 
 const Sec3 = () => {
     const [data, setData] = useState([])
+    const axios = useAxios()
     useEffect(() => {
-        fetch('http://localhost:5000/populer_instractor')
-            .then(res => res.json())
-            .then(resData => setData(resData))
+        axios.get('/populer_instractor')
+            .then(resData => setData(resData.data))
     }, [])
     return (
         <div className='mt-20'>

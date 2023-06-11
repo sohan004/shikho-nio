@@ -1,8 +1,10 @@
 import React from 'react';
 import useAllClass from '../../useHook/useAllClass/useAllClass';
 import Swal from 'sweetalert2';
+import useAxios from '../../useHook/useAxios/useAxios';
 
 const ManageClass = () => {
+    const axios = useAxios()
     const { data, refetch } = useAllClass()
     const approve = (status, d) => {
         Swal.fire({
@@ -15,12 +17,7 @@ const ManageClass = () => {
             confirmButtonText: 'Yes'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/class_details/${d._id}`, {
-                    method: 'PUT',
-                    headers: { 'content-type': 'application/json' },
-                    body: JSON.stringify({ status: status + 'd' })
-                })
-                    .then(res => res.json())
+                axios.put(`/class_details/${d._id}`, { status: status + 'd' })
                     .then(resData => {
                         Swal.fire({
                             position: 'top-center',
@@ -47,12 +44,7 @@ const ManageClass = () => {
         })
 
         if (text) {
-            fetch(`http://localhost:5000/class_details/${d._id}`, {
-                method: 'PUT',
-                headers: { 'content-type': 'application/json' },
-                body: JSON.stringify({ feedback: text })
-            })
-                .then(res => res.json())
+            axios.put(`/class_details/${d._id}`, { feedback: text })
                 .then(resData => {
                     Swal.fire({
                         position: 'top-center',

@@ -2,14 +2,15 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContex } from '../../AuthProvider/AuthProvider';
 import { FaRegMoneyBillAlt } from 'react-icons/fa';
 import moment from 'moment/moment';
+import useAxios from '../../useHook/useAxios/useAxios';
 
 const PayHistory = () => {
+    const axios = useAxios()
     const { user } = useContext(AuthContex)
     const [data, setData] = useState([])
     useEffect(() => {
-        fetch(`http://localhost:5000/payment/${user?.email}`)
-            .then(res => res.json())
-            .then(resData => setData(resData))
+        axios.get(`/payment/${user?.email}`)
+            .then(resData => setData(resData.data))
     }, [user])
     return (
         <div>

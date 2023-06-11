@@ -10,7 +10,7 @@ const SignIn = () => {
     const loc = useLocation()
     const [tf, setTf] = useState(true)
     const [loading, setLoading] = useState(true)
-    const { signIn, google } = useContext(AuthContex)
+    const { signIn, google, jwt } = useContext(AuthContex)
     const [eror, setEror] = useState('')
     const { register, handleSubmit, watch, formState: { errors } } = useForm()
     const navigate = useNavigate()
@@ -19,9 +19,16 @@ const SignIn = () => {
         setLoading(false)
         signIn(data.email, data.pass)
             .then(result => {
-                setEror('')
-                navigate(loc?.state ? loc.state : '/')
-
+                const userInfo = { name: result?.user?.displayName, email: result?.user?.email, role: 'student', img: result?.user?.photoURL }
+                jwt(userInfo)
+                    .then(res => res.json())
+                    .then(resData => {
+                        if (resData.token) {
+                            localStorage.setItem('user-token', resData.token)
+                            setEror('')
+                            navigate(loc?.state ? loc.state : '/')
+                        }
+                    })
             })
             .catch(err => {
                 setEror(err.message)
@@ -32,7 +39,7 @@ const SignIn = () => {
     const ggl = () => {
         google()
             .then(result => {
-                const userInfo = { name: result.user.displayName, email: result.user.email, role: 'student', img: result.user.photoURL }
+                const userInfo = { name: result?.user?.displayName, email: result?.user?.email, role: 'student', img: result?.user?.photoURL }
                 fetch('http://localhost:5000/users', {
                     method: 'POST',
                     headers: { 'content-type': 'application/json' },
@@ -40,8 +47,15 @@ const SignIn = () => {
                 })
                     .then(res => res.json())
                     .then(() => {
-                        setEror('')
-                        navigate(loc?.state ? loc.state : '/')
+                        jwt(userInfo)
+                            .then(res => res.json())
+                            .then(resData => {
+                                if (resData.token) {
+                                    localStorage.setItem('user-token', resData.token)
+                                    setEror('')
+                                    navigate(loc?.state ? loc.state : '/')
+                                }
+                            })
                     })
             })
             .catch(err => {
