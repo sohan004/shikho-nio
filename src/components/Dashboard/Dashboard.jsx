@@ -1,14 +1,15 @@
 import React, { useContext } from 'react';
-import { NavLink, Outlet, useNavigate, } from 'react-router-dom';
+import { NavLink, Outlet, useNavigate, useNavigation, } from 'react-router-dom';
 import useUser from '../useHook/useUser/useUser';
 import useRole from '../useHook/useRole/useRole';
 import { AuthContex } from '../AuthProvider/AuthProvider';
 import { BsBuildingAdd, BsCurrencyExchange, BsFillCartPlusFill, BsFillCheckCircleFill, BsFillHouseDoorFill, BsFillLayersFill, BsFillPersonFill, BsFillXOctagonFill, BsHouseDoorFill } from "react-icons/bs";
-import { GridLoader } from 'react-spinners';
+import { GridLoader, HashLoader } from 'react-spinners';
 
 const Dashboard = () => {
     const { user, out } = useContext(AuthContex)
     const navigate = useNavigate()
+    const navigation = useNavigation()
 
     const student = <>
         <NavLink to="/dashboard/selected_class" className={({ isActive }) => `flex items-center gap-2 font-medium ${isActive ? 'bg-gray-200 text-black p-3 rounded-e-3xl' : ''}`}><BsFillCartPlusFill /> My Selected Class</NavLink>
@@ -39,7 +40,9 @@ const Dashboard = () => {
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content p-4 lg:mt-8 overflow-x-auto">
                     <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
-                    <Outlet></Outlet>
+                    {navigation.state === 'loading' ? <div className='flex justify-center items-center mt-8'>
+                        <HashLoader color="#6A6662" />
+                    </div> : <Outlet></Outlet>}
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-2" className="drawer-overlay"></label>

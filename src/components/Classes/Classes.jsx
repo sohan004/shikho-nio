@@ -3,13 +3,14 @@ import { BsFillCartPlusFill } from "react-icons/bs";
 import useRole from '../useHook/useRole/useRole';
 import { AuthContex } from '../AuthProvider/AuthProvider';
 import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { GridLoader } from 'react-spinners';
 
 const Classes = () => {
     const [classes, setClasses] = useState([])
     const { user } = useContext(AuthContex)
     const navigate = useNavigate()
+    const loc = useLocation()
     useEffect(() => {
         fetch('http://localhost:5000/approve_class')
             .then(res => res.json())
@@ -28,7 +29,7 @@ const Classes = () => {
                 confirmButtonText: 'OK'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    navigate('/sign_in')
+                    navigate('/sign_in', { state: loc.pathname })
                 }
             })
         }
@@ -68,8 +69,8 @@ const Classes = () => {
                 <GridLoader color="#36d7b7" />
             </div> : <div className='grid grid-cols-1 md:grid-cols-2 mt-6 gap-6 lg:gap-9'>
                 {classes.map(c =>
-                    <div key={c._id} className={`card w-full ${+c.seat === 0 ? 'bg-red-200' : 'bg-base-100'}  bg-base-100 shadow-xl`}>
-                        <figure><img src={c.classImg} alt="Shoes" /></figure>
+                    <div key={c._id} className={`card w-full cb ${+c.seat === 0 ? 'bg-red-200' : 'bg-base-100'} shadow-xl`}>
+                        <figure><img src={c.classImg} className='w-full ci duration-300' alt="class" /></figure>
                         <div className="card-body">
                             <h2 className="card-title">{c.className}</h2>
                             <div>
