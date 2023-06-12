@@ -1,6 +1,7 @@
 # live link
 * kjngoljknwekognweskognwse
-![logo](https://i.ibb.co/M78w8pL/logo.png) SHIKHO NIO
+![logo](https://i.ibb.co/M78w8pL/logo.png)
+* Website Name: SHIKHO NIO
 # Project Details
 * Explain the home page: First part is the navbar. This is a common element for all the pages, not the Error Page. the second part is the slider it shows some class pictures and text. The third part is the popular class section which shows our top 6 classes. Four-part is a popular instructor section it shows our top 6 Instructors. Five-part is Our student review which shows our top student reviews. six part is Footer. This is a common element for all the pages, not the Error Page
 
