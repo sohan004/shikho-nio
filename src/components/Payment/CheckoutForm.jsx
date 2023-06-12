@@ -17,7 +17,7 @@ const CheckoutForm = ({ price, id, classId, enroll, seat, instractor }) => {
     const axios = useAxios()
 
     useEffect(() => {
-        axios.post("http://localhost:5000/create-payment-intent", { price: +price })
+        axios.post("https://assignment-12-server-seven-virid.vercel.app/create-payment-intent", { price: +price })
             .then((data) => setClientSecret(data.data.clientSecret));
     }, []);
 

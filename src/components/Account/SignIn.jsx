@@ -40,7 +40,7 @@ const SignIn = () => {
         google()
             .then(result => {
                 const userInfo = { name: result?.user?.displayName, email: result?.user?.email, role: 'student', img: result?.user?.photoURL }
-                fetch('http://localhost:5000/users', {
+                fetch('https://assignment-12-server-seven-virid.vercel.app/users', {
                     method: 'POST',
                     headers: { 'content-type': 'application/json' },
                     body: JSON.stringify(userInfo)

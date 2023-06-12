@@ -1,12 +1,20 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
+import { useEffect } from 'react';
+import Aos from 'aos';
+import 'aos/dist/aos.css';
+
+
 
 const Instractor = () => {
+    useEffect(()=>{
+        Aos.init({duration: 2000})
+    },[])
     const data = useLoaderData()
     return (
         <div className='grid mt-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-9'>
             {data.map(d =>
-                <div key={d._id} className="w-full border p-8 sm:flex sm:space-x-6 shadow-sm dark:bg-gray-900 dark:text-gray-100">
+                <div data-aos='fade-up' key={d._id} className="w-full border p-8 sm:flex sm:space-x-6 shadow-sm dark:bg-gray-900 dark:text-gray-100">
                     <div className="flex-shrink-0 w-full mb-6 h-44 sm:h-32 sm:w-32 sm:mb-0">
                         <img src={d.img} alt="" className="object-cover object-center w-full h-full rounded dark:bg-gray-500" />
                     </div>

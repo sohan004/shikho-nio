@@ -5,6 +5,7 @@ import useRole from '../useHook/useRole/useRole';
 import { AuthContex } from '../AuthProvider/AuthProvider';
 import { BsBuildingAdd, BsCurrencyExchange, BsFillCartPlusFill, BsFillCheckCircleFill, BsFillHouseDoorFill, BsFillLayersFill, BsFillPersonFill, BsFillXOctagonFill, BsHouseDoorFill } from "react-icons/bs";
 import { GridLoader, HashLoader } from 'react-spinners';
+import  logo from '../../assets/logo.png'
 
 const Dashboard = () => {
     const { user, out } = useContext(AuthContex)
@@ -47,7 +48,10 @@ const Dashboard = () => {
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
                     <ul className="menu p-4 w-80 h-full  text-white ps-7 bg-cyan-900 flex flex-col gap-5">
-                        <h1 className='text-2xl font-semibold border-b-2 pb-7 mb-7'>SHIKHO NIO</h1>
+                        <div className='flex items-center gap-1 border-b-2 pb-6'>
+                            <img src={logo} className='w-9 md:w-14' alt="" />
+                            <h1 className=' text-sm md:text-2xl font-bold md:px-3'>SHIKHO NIO</h1>
+                        </div>
                         {/* Sidebar content here */}
                         {data?.role === 'student' && student}
                         {data?.role === 'instractor' && instractor}

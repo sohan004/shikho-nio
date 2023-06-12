@@ -36,7 +36,7 @@ const ManageUser = () => {
     //                 }).then((result) => {
 
     //                     if (result.isConfirmed) {
-    //                         fetch(`http://localhost:5000/users/${d._id}`, {
+    //                         fetch(`https://assignment-12-server-seven-virid.vercel.app/users/${d._id}`, {
     //                             method: 'PATCH',
     //                             headers: { 'content-type': 'application/json' },
     //                             body: JSON.stringify({ role: value.toLowerCase() })

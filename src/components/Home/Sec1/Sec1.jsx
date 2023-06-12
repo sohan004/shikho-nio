@@ -8,6 +8,7 @@ import img4 from '../../../assets/caru4.png'
 import AwesomeSlider from 'react-awesome-slider';
 import cssStyle from './style.scss'
 import anim from './Anim.scss'
+import { useEffect } from 'react';
 
 
 const Sec1 = () => {
@@ -24,11 +25,11 @@ const Sec1 = () => {
                     <img src={img3} className='w-full rounded-3xl' />
                 </div>
             </Carousel>
-            <div className='absolute top-2 md:top-1/3 hidden md:block  lg:top-2/4   glass shadow-2xl px-7 py-3 md:py-14'>
-                <h1 className='text-lg md:text-2xl lg:text-4xl mb-1 md:mb-5 font-semibold '>SHIKHO NIO - Explore the World of Language Learning</h1>
-                <p className='text-xs md:text-sm'> Shikho Nio, meaning "Learn and Thrive" in Bengali, is your gateway to an immersive language learning experience. Our website is designed to empower learners of all ages and backgrounds to embark on a journey of linguistic discovery. With a diverse range of courses, interactive lessons, and expert guidance, Shikho Nio offers a holistic approach to language acquisition </p>
-            </div> */}
-            <AwesomeSlider animation='fallAnimation' cssModule={[cssStyle,anim]}>
+            // <div className='absolute top-2 md:top-1/3 hidden md:block  lg:top-2/4   glass shadow-2xl px-7 py-3 md:py-14'>
+            //     <h1 className='text-lg md:text-2xl lg:text-4xl mb-1 md:mb-5 font-semibold '>SHIKHO NIO - Explore the World of Language Learning</h1>
+            //     <p className='text-xs md:text-sm'> Shikho Nio, meaning "Learn and Thrive" in Bengali, is your gateway to an immersive language learning experience. Our website is designed to empower learners of all ages and backgrounds to embark on a journey of linguistic discovery. With a diverse range of courses, interactive lessons, and expert guidance, Shikho Nio offers a holistic approach to language acquisition </p>
+            // </div> */}
+            <AwesomeSlider animation='fallAnimation' cssModule={[cssStyle, anim]}>
                 <div className='fallAnimation'>
                     <img src={img1} className='w-full' />
                 </div>
@@ -39,6 +40,10 @@ const Sec1 = () => {
                     <img src={img3} className='w-full' />
                 </div>
             </AwesomeSlider>
+                <div className='absolute top-2 md:top-1/3 hidden md:block z-10  lg:top-2/3 w-full text-center    glass shadow-2xl px-7 py-3 md:py-14'>
+                    <h1 className='text-lg md:text-2xl lg:text-4xl mb-1 md:mb-5 font-semibold '>"Empower Your Learning Journey with Shikonio"</h1>
+                    <p className='text-xs md:text-base'> Welcome to Shikonio, where learning meets excellence. Discover, enroll, and grow with us today!</p>
+                </div>
         </div>
     );
 };

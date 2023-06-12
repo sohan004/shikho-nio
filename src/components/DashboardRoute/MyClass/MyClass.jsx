@@ -34,7 +34,7 @@ const MyClass = () => {
                             <th>{d.className}</th>
                             <td><button className={`btn btn-xs ${d.status === 'approved' && 'btn-accent'} ${d.status === 'denied' && 'btn-secondary'} ${d.status === 'pending' && 'btn-primary'}`}>{d.status}</button></td>
                             <td>{d.enroll}</td>
-                            <td><button onClick={() => fedback(d.feedback.length === 0 ? 'Admin has not given any feedback' : d.feedback)} className="btn btn-neutral btn-sm">Feedback</button></td>
+                            <td><button disabled={d.status === 'pending'} onClick={() => fedback(d.feedback.length === 0 ? 'Admin has not given any feedback' : d.feedback)} className="btn btn-neutral btn-sm">Feedback</button></td>
                             <td><NavLink to={`/dashboard/class_update/${d._id}`}><button className="btn btn-error btn-sm">Update</button></NavLink></td>
                         </tr>)}
                     </tbody>

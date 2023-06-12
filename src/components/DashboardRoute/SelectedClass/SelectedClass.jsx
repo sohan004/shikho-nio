@@ -21,7 +21,7 @@ const SelectedClass = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`http://localhost:5000/carts/${c._id}`)
+                axios.delete(`https://assignment-12-server-seven-virid.vercel.app/carts/${c._id}`)
                     .then(resData => {
                         if (resData.data.deletedCount > 0) {
                             refetch()

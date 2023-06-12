@@ -25,6 +25,7 @@ import PrivateStudent from './components/Private.jsx/PrivateStudent.jsx'
 import PrivateInstractor from './components/Private.jsx/PrivateInstractor.jsx'
 import PrivateAdmin from './components/Private.jsx/PrivateAdmin.jsx'
 import Welcome from './components/DashboardRoute/Welcome/Welcome.jsx'
+import Error from './components/Error/Error.jsx'
 
 
 
@@ -44,7 +45,7 @@ const router = createBrowserRouter([
       {
         path: '/instractor',
         element: <Instractor></Instractor>,
-        loader: () => fetch('http://localhost:5000/all_instractor')
+        loader: () => fetch('https://assignment-12-server-seven-virid.vercel.app/all_instractor')
       },
       {
         path: '/sign_in',
@@ -91,7 +92,7 @@ const router = createBrowserRouter([
       {
         path: '/dashboard/pay/:id',
         element: <PrivateStudent><Payment></Payment></PrivateStudent>,
-        loader: ({ params }) => fetch(`http://localhost:5000/cart/${params.id}`)
+        loader: ({ params }) => fetch(`https://assignment-12-server-seven-virid.vercel.app/cart/${params.id}`)
       },
       {
         path: '/dashboard/payment',
@@ -100,9 +101,13 @@ const router = createBrowserRouter([
       {
         path: '/dashboard/class_update/:id',
         element: <PrivateInstractor><MyClassUpdate></MyClassUpdate></PrivateInstractor>,
-        loader: ({ params }) => fetch(`http://localhost:5000/class_details/${params.id}`)
+        loader: ({ params }) => fetch(`https://assignment-12-server-seven-virid.vercel.app/class_details/${params.id}`)
       },
     ]
+  },
+  {
+    path: '*',
+    element:<Error></Error>
   }
 ])
 

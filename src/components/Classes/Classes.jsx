@@ -6,15 +6,22 @@ import Swal from 'sweetalert2';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { GridLoader } from 'react-spinners';
 import useAxios from '../useHook/useAxios/useAxios';
+import Aos from 'aos';
+import 'aos/dist/aos.css';
+
+
 
 const Classes = () => {
+    useEffect(()=>{
+        Aos.init({duration: 2000})
+    },[])
     const axios = useAxios()
     const [classes, setClasses] = useState([])
     const { user } = useContext(AuthContex)
     const navigate = useNavigate()
     const loc = useLocation()
     useEffect(() => {
-        fetch('http://localhost:5000/approve_class')
+        fetch('https://assignment-12-server-seven-virid.vercel.app/approve_class')
             .then(res => res.json())
             .then(data => setClasses(data))
     }, [])
@@ -66,7 +73,7 @@ const Classes = () => {
                 <GridLoader color="#36d7b7" />
             </div> : <div className='grid grid-cols-1 md:grid-cols-2 mt-6 gap-6 lg:gap-9'>
                 {classes.map(c =>
-                    <div key={c._id} className={`card w-full cb ${+c.seat === 0 ? 'bg-red-200' : 'bg-base-100'} shadow-xl`}>
+                    <div data-aos='fade-up' key={c._id} className={`card w-full cb ${+c.seat === 0 ? 'bg-red-200' : 'bg-base-100'} shadow-xl`}>
                         <figure><img src={c.classImg} className='w-full ci duration-300' alt="class" /></figure>
                         <div className="card-body">
                             <h2 className="card-title">{c.className}</h2>

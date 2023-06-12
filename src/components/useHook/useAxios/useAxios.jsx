@@ -1,6 +1,6 @@
 import { useContext, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { AuthContex } from '../../AuthProvider/AuthProvider';
 
@@ -8,9 +8,10 @@ import { AuthContex } from '../../AuthProvider/AuthProvider';
 const useAxios = () => {
     const { out } = useContext(AuthContex);
     const navigate = useNavigate();
+    const loc = useLocation()
 
     const axiosSecure = axios.create({
-        baseURL: 'http://localhost:5000',
+        baseURL: 'https://assignment-12-server-seven-virid.vercel.app',
     });
 
     useEffect(() => {
@@ -31,7 +32,7 @@ const useAxios = () => {
                         title: 'Your session expired',
                     })
                     await out();
-                    navigate('/sign_in');
+                    navigate('/sign_in', { state: loc.pathname });
                 }
                 return Promise.reject(error);
             }

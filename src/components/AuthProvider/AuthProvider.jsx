@@ -6,6 +6,7 @@ export const AuthContex = createContext(null)
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [load, setLoad] = useState(true)
+    const [tf, setTf] = useState(localStorage.getItem('them') === 'true'? false : true)
     const auth = getAuth(app)
 
     const provider = new GoogleAuthProvider()
@@ -34,7 +35,7 @@ const AuthProvider = ({ children }) => {
         })
     }
     const jwt = (u) => {
-        return fetch('http://localhost:5000/jwt', {
+        return fetch('https://assignment-12-server-seven-virid.vercel.app/jwt', {
             method: 'post',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(u)
@@ -60,7 +61,9 @@ const AuthProvider = ({ children }) => {
         updt,
         out,
         google,
-        jwt
+        jwt,
+        tf,
+        setTf
     }
     return (
         <AuthContex.Provider value={info}>
