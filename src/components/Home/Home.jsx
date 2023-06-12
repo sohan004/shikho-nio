@@ -12,15 +12,15 @@ const Home = () => {
     }, 2000);
     return (
         <div>
-            {tf?<div>
+            {tf ? <div>
                 <Sec1></Sec1>
                 <Sec2></Sec2>
                 <Sec3></Sec3>
                 <Sec4></Sec4>
-            </div>: 
-            <div className='flex justify-center items-center mt-8'>
-            <HashLoader color="#6A6662" />
-          </div>}
+            </div> :
+                <div className='flex justify-center items-center mt-8'>
+                    <HashLoader color="#6A6662" />
+                </div>}
         </div>
     );
 };
