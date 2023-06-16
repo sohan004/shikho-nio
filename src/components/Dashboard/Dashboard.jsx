@@ -5,7 +5,8 @@ import useRole from '../useHook/useRole/useRole';
 import { AuthContex } from '../AuthProvider/AuthProvider';
 import { BsBuildingAdd, BsCurrencyExchange, BsFillCartPlusFill, BsFillCheckCircleFill, BsFillHouseDoorFill, BsFillLayersFill, BsFillPersonFill, BsFillXOctagonFill, BsHouseDoorFill } from "react-icons/bs";
 import { GridLoader, HashLoader } from 'react-spinners';
-import  logo from '../../assets/logo.png'
+import logo from '../../assets/logo.png'
+import { FaList } from 'react-icons/fa';
 
 const Dashboard = () => {
     const { user, out } = useContext(AuthContex)
@@ -40,7 +41,10 @@ const Dashboard = () => {
             </div> : <div className="drawer lg:drawer-open">
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content p-4 lg:mt-8 overflow-x-auto">
-                    <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
+                    <div className='flex justify-center p-3 gap-2 border-b-2 mb-3 items-center'>
+                        <label htmlFor="my-drawer-2" className=" drawer-button lg:hidden text-2xl"><FaList /></label>
+                        <p>Menu</p>
+                    </div>
                     {navigation.state === 'loading' ? <div className='flex justify-center items-center mt-8'>
                         <HashLoader color="#6A6662" />
                     </div> : <Outlet></Outlet>}

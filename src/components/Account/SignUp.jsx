@@ -6,11 +6,13 @@ import gif from '../../assets/googlevsprivacy.gif'
 import { AuthContex } from '../AuthProvider/AuthProvider';
 import { GridLoader } from 'react-spinners';
 import Swal from 'sweetalert2';
+import useTitle from '../useHook/useTitle/useTitle';
 
 const SignUp = () => {
+    useTitle('register')
     const [tf, setTf] = useState(true)
     const [tf2, setTf2] = useState(true)
-    const { signUp, updt, out } = useContext(AuthContex)
+    const { signUp, updt, out, tf: them } = useContext(AuthContex)
     const [loading, setLoading] = useState(true)
     const [eror, setEror] = useState('')
     const { register, handleSubmit, watch, formState: { errors } } = useForm()
@@ -36,7 +38,7 @@ const SignUp = () => {
                     .then(result => {
                         updt(result.user, data.name, imgData.data.display_url)
                             .then(updtData => {
-                                const userInfo = { name: result.user.displayName, email: result.user.email, role: 'student',img: result.user.photoURL }
+                                const userInfo = { name: result.user.displayName, email: result.user.email, role: 'student', img: result.user.photoURL }
                                 fetch('https://assignment-12-server-seven-virid.vercel.app/users', {
                                     method: 'POST',
                                     headers: { 'content-type': 'application/json' },
@@ -72,7 +74,7 @@ const SignUp = () => {
 
     return (
         <div className='max-w-screen-xl mx-auto shadow-lg'>
-            <div className='flex flex-col-reverse gap-4 md:flex-row items-center py-11  bg-slate-100  px-6'>
+            <div className={`${them? ' bg-slate-100 text-black': 'bg-gray-800 text-gray-400'} flex flex-col-reverse gap-4 md:flex-row items-center py-11   px-6`}>
                 <div className='w-full md:w-6/12'>
                     <img src={gif} className='w-100' alt="" />
                 </div>
@@ -112,7 +114,7 @@ const SignUp = () => {
 
                             <button className="btn btn-primary w-full mt-6">sign up</button>
                         </form>
-                        <Link to="/sign_in"><p className='text-center my-6 text-slate-950'>Alredy you have account? sign in</p></Link>
+                        <Link to="/sign_in"><p className={`text-center my-6 ${them? 'text-black': 'text-white'}`}>Alredy you have account? sign in</p></Link>
                     </div> : <div className='flex justify-center my-5'>
                         <GridLoader color="#36d7b7" />
                     </div>}

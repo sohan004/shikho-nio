@@ -5,12 +5,14 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import gif from '../../assets/googlevsprivacy.gif'
 import { AuthContex } from '../AuthProvider/AuthProvider';
 import { GridLoader } from 'react-spinners';
+import useTitle from '../useHook/useTitle/useTitle';
 
 const SignIn = () => {
+    useTitle('sign in')
     const loc = useLocation()
     const [tf, setTf] = useState(true)
     const [loading, setLoading] = useState(true)
-    const { signIn, google, jwt } = useContext(AuthContex)
+    const { signIn, google, jwt, tf: them } = useContext(AuthContex)
     const [eror, setEror] = useState('')
     const { register, handleSubmit, watch, formState: { errors } } = useForm()
     const navigate = useNavigate()
@@ -67,7 +69,7 @@ const SignIn = () => {
 
     return (
         <div className='max-w-screen-xl mx-auto shadow-lg'>
-            <div className='flex flex-col-reverse gap-4 md:flex-row items-center py-11  bg-slate-100  px-6'>
+            <div className={` flex flex-col-reverse gap-4 md:flex-row items-center py-11 ${them? 'bg-slate-100 text-black': 'bg-gray-800 text-gray-400'}  px-6`}>
                 <div className='w-full md:w-6/12'>
                     <img src={gif} className='w-100' alt="" />
                 </div>
@@ -87,10 +89,10 @@ const SignIn = () => {
                             <p className='text-red-600'>{eror}</p>
                             <button className="btn btn-primary w-full mt-6">Log in</button>
                         </form>
-                        <Link to="/sign_up"><p className='text-center my-6 text-slate-950'>New here? Create a New Account</p></Link>
+                        <Link to="/sign_up"><p className='text-center my-6 '>New here? Create a New Account</p></Link>
                         <p className='text-center'>or sign with</p>
                         <div className='text-center mt-3'>
-                            <button onClick={ggl} className="btn btn-outline">Google</button>
+                            <button onClick={ggl} className={`btn  ${them && 'btn-outline'}`}>Google</button>
                         </div>
                     </div> : <div className='flex justify-center my-5'>
                         <GridLoader color="#36d7b7" />

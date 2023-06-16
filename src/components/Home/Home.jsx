@@ -4,8 +4,10 @@ import Sec2 from './Sec2/Sec2';
 import Sec3 from './Sec3/Sec3';
 import { HashLoader } from 'react-spinners';
 import Sec4 from './Sec4/Sec4';
+import useTitle from '../useHook/useTitle/useTitle';
 
 const Home = () => {
+    useTitle('home')
     const [tf, setTf] = useState(false)
     setTimeout(() => {
         setTf(true)
